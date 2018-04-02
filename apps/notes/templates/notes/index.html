@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ajax Notes</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'notes/css/style.css' %}">
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.min.js"
+	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	  crossorigin="anonymous"></script>
+</head>
+<body>
+	<h1>Success!</h1>
+	<div id="pagewrap">
+		
+			<p>Notes</p>
+			<hr />
+			<div id="notes">
+					{% for note in notes %}
+						<form class="note" action="notes/{{note.id}}" method="post">
+							{% csrf_token %}
+							<h4>{{note.title}}</h4>
+							<input type="submit" value="Delete">
+							<br />
+							<p>{{note.content}}</p>
+						</form>
+					{% endfor %}
+			</div>
+			<hr />
+			<form id="new_note" action="/new_note">
+				{% csrf_token %}
+				<input type="text" name="title" placeholder="Insert note title here...">
+				<input type="submit" value="Add Note" class="button">
+			</form>
+		
+	</div>
+
+	<script type="text/javascript" src="{% static 'notes/js/script.js' %}"></script>
+
+</body>
+</html>
